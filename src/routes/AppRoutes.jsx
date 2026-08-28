@@ -5,6 +5,8 @@ import AuthLayout from '../layouts/AuthLayout.jsx';
 import AdminLayout from '../layouts/AdminLayout.jsx';
 import NotFoundPage from '../pages/NotFoundPage.jsx';
 import ErrorPage from '../pages/ErrorPage.jsx';
+import SeatSelectionPage from '../pages/SeatSelectionPage.jsx';
+import BookingSummaryPage from '../pages/BookingSummaryPage.jsx';
 import { ProtectedRoute, GuestRoute, AdminRoute, OwnerRoute } from '../components/ProtectedRoute.jsx';
 
 const HomePage = lazy(() => import('../pages/HomePage.jsx'));
@@ -17,6 +19,7 @@ const TheatreDashboardPage = lazy(() => import('../pages/TheatreDashboardPage.js
 const ProfilePage = lazy(() => import('../pages/ProfilePage.jsx'));
 const RequestTheatrePage = lazy(() => import('../pages/RequestTheatrePage.jsx'));
 const MovieDetailsPage = lazy(() => import('../pages/MovieDetailsPage.jsx'));
+const BookingSuccessPage = lazy(() => import('../pages/BookingSuccessPage.jsx'));
 
 function AppRoutes() {
   return (
@@ -26,6 +29,9 @@ function AppRoutes() {
           <Route path="/" element={<HomePage />} />
           <Route path="/movies" element={<MoviesPage />} />
           <Route path="/movies/:movieId" element={<MovieDetailsPage />} />
+          <Route path="/show/:showId/seats" element={<SeatSelectionPage />} />
+          <Route path="/booking-summary" element={<BookingSummaryPage />} />
+          <Route path="/booking-success" element={<BookingSuccessPage />} />
           <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
           <Route path="/owner/request" element={<ProtectedRoute><RequestTheatrePage /></ProtectedRoute>} />
           <Route path="/theatres" element={<OwnerRoute><TheatreDashboardPage /></OwnerRoute>} />
@@ -42,8 +48,9 @@ function AppRoutes() {
           <Route path="/admin" element={<AdminRoute><AdminDashboardPage /></AdminRoute>} />
         </Route>
 
-        <Route path="*" element={<Navigate to="/404" replace />} />
         <Route path="/error" element={<ErrorPage />} />
+        <Route path="*" element={<Navigate to="/404" replace />} />
+        
       </Routes>
     </Suspense>
   );

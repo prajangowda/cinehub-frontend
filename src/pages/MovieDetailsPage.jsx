@@ -123,9 +123,9 @@ function MovieDetailsPage() {
         {/* Content */}
         <div className="relative max-w-7xl mx-auto px-6 py-12 lg:py-24">
 
-          
 
-        <div className="flex flex-col md:flex-row gap-8 lg:gap-12 items-start">
+
+          <div className="flex flex-col md:flex-row gap-8 lg:gap-12 items-start">
 
             {/* Movie Poster */}
             <div className="flex-shrink-0">
@@ -451,9 +451,7 @@ function MovieDetailsPage() {
 
                                 <button
                                   key={show.id}
-                                  onClick={() =>
-                                    navigate(`/booking/${show.id}`)
-                                  }
+                                  onClick={() => navigate(`/show/${show.id}/seats`)}
                                   className="
                                     min-w-28
                                     px-5

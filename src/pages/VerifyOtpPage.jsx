@@ -24,7 +24,7 @@ function VerifyOtpPage() {
       const isAdmin = isAdminUser(user);
       navigate(isAdmin ? '/admin' : '/');
     } catch (err) {
-      setError(err.message || 'OTP verification failed.');
+      setError(err?.response?.data?.message || 'OTP verification failed.');
     }
   };
 

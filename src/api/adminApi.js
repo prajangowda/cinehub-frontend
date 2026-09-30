@@ -19,3 +19,13 @@ export async function rejectOwnerRequest(id) {
   const response = await apiClient.put(`/admin/owner-requests/${id}/reject`);
   return response.data;
 }
+
+export const getAllMovies = async () => {
+  const response = await apiClient.get("/public/movies");
+  return response.data;
+};
+
+export const deleteMovie = async (movieId) => {
+  const response = await apiClient.delete(`/admin/movies/${movieId}`);
+  return response.data;
+};

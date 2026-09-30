@@ -17,7 +17,8 @@ function LoginPage() {
       await signIn({ email, password });
       navigate('/');
     } catch (err) {
-      setError(err.message || 'Unable to sign in. Please try again.');
+      console.log(err.response)
+      setError(err.response.data.message|| 'Unable to sign in. Please try again.');
     }
   };
 

@@ -57,7 +57,7 @@ function RegisterPage() {
       navigated = true;
       navigate(isAdmin ? '/admin' : '/');
     } catch (err) {
-      setError(err.message || 'Unable to create account. Please try again.');
+      setError(err.response.data.message || 'Unable to create account. Please try again.');
     } finally {
       if (!navigated) {
         setIsSubmitting(false);
@@ -82,7 +82,7 @@ function RegisterPage() {
       const isAdmin = isAdminUser(user);
       navigate(isAdmin ? '/admin' : '/');
     } catch (err) {
-      setError(err.message || 'OTP verification failed.');
+      setError(err.response.data.message|| 'OTP verification failed.');
     }
   };
 

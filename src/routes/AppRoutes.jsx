@@ -20,6 +20,7 @@ const ProfilePage = lazy(() => import('../pages/ProfilePage.jsx'));
 const RequestTheatrePage = lazy(() => import('../pages/RequestTheatrePage.jsx'));
 const MovieDetailsPage = lazy(() => import('../pages/MovieDetailsPage.jsx'));
 const BookingSuccessPage = lazy(() => import('../pages/BookingSuccessPage.jsx'));
+const MyBookingsPage = lazy(() => import('../pages/MyBookingsPage.jsx'));
 
 function AppRoutes() {
   return (
@@ -32,6 +33,7 @@ function AppRoutes() {
           <Route path="/show/:showId/seats" element={<SeatSelectionPage />} />
           <Route path="/booking-summary" element={<BookingSummaryPage />} />
           <Route path="/booking-success" element={<BookingSuccessPage />} />
+          <Route path="/my-bookings" element={<MyBookingsPage />} />
           <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
           <Route path="/owner/request" element={<ProtectedRoute><RequestTheatrePage /></ProtectedRoute>} />
           <Route path="/theatres" element={<OwnerRoute><TheatreDashboardPage /></OwnerRoute>} />
@@ -50,7 +52,7 @@ function AppRoutes() {
 
         <Route path="/error" element={<ErrorPage />} />
         <Route path="*" element={<Navigate to="/404" replace />} />
-        
+
       </Routes>
     </Suspense>
   );

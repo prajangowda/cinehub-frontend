@@ -8,7 +8,8 @@ import {
     MapPin,
     Ticket,
 } from "lucide-react";
-import axios from "axios";
+import { fetchShow, fetchShowSeats } from "../services/bookingService";
+
 
 const SeatSelectionPage = () => {
     const { showId } = useParams();
@@ -28,14 +29,8 @@ const SeatSelectionPage = () => {
 
     const loadShow = async () => {
         try {
-            const response = await axios.get(
-                `http://localhost:8080/api/v1/shows/${showId}`,
-                {
-                    withCredentials: true,
-                }
-            );
-
-            setShowInfo(response.data);
+            const show = await fetchShow(showId);
+            setShowInfo(show);
         } catch (err) {
             console.error("Failed to load show:", err);
             setError("Unable to load show details.");
@@ -47,14 +42,8 @@ const SeatSelectionPage = () => {
             setLoading(true);
             setError("");
 
-            const response = await axios.get(
-                `http://localhost:8080/api/v1/shows/${showId}/seats`,
-                {
-                    withCredentials: true,
-                }
-            );
-
-            setSeats(response.data);
+            const showSeats = await fetchShowSeats(showId);
+            setSeats(showSeats);
         } catch (err) {
             console.error("Failed to fetch seats:", err);
             setError("Unable to load seats. Please try again.");

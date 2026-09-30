@@ -2,6 +2,7 @@ import apiClient from './apiClient.js';
 
 export async function requestTheatreRole(payload) {
   const response = await apiClient.post('/owner/request', payload);
+ 
   return response.data;
 }
 

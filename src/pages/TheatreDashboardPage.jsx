@@ -140,7 +140,7 @@ function TheatreDashboardPage() {
           setScreens([]);
         }
       } catch (err) {
-        setError(err?.response?.data?.message || err.message || 'Unable to load your theatres.');
+        setError(err?.response?.data?.message || 'Unable to load your theatres.');
       } finally {
         setLoadingTheatres(false);
       }
@@ -155,7 +155,7 @@ function TheatreDashboardPage() {
           : response?.content || response?.data || response?.items || [];
         setMovies(Array.isArray(movieList) ? movieList : []);
       } catch (err) {
-        setError(err?.response?.data?.message || err.message || 'Unable to load movies.');
+        setError(err?.response?.data?.message || 'Unable to load movies.');
       } finally {
         setLoadingMovies(false);
       }
@@ -314,7 +314,7 @@ function TheatreDashboardPage() {
       const data = await response.json();
       setSearchResults(Array.isArray(data) ? data : []);
     } catch (err) {
-      setError(err.message || 'Unable to search location.');
+      setError(err?.response?.data?.message || 'Unable to search location.');
     } finally {
       setLoadingSearch(false);
     }
@@ -388,7 +388,7 @@ function TheatreDashboardPage() {
       setPosition(DEFAULT_LOCATION);
       setSearchQuery('');
     } catch (err) {
-      setError(err?.response?.data?.message || err.message || 'Failed to create theatre.');
+      setError(err?.response?.data?.message || 'Failed to create theatre.');
     } finally {
       setIsSubmittingProfile(false);
     }
@@ -424,7 +424,7 @@ function TheatreDashboardPage() {
         name: `Screen ${screens.length + 2}`,
       }));
     } catch (err) {
-      setError(err?.response?.data?.message || err.message || 'Failed to create screen.');
+      setError(err?.response?.data?.message || 'Failed to create screen.');
     } finally {
       setIsSubmittingScreen(false);
     }
@@ -464,7 +464,7 @@ function TheatreDashboardPage() {
         endTime: '13:00',
       }));
     } catch (err) {
-      setError(err?.response?.data?.message || err.message || 'Failed to schedule show.');
+      setError(err?.response?.data?.message || 'Failed to schedule show.');
     } finally {
       setIsSubmittingShow(false);
     }

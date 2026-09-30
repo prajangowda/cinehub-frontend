@@ -99,6 +99,7 @@ const BookingSuccessPage = () => {
             </div>
 
             {/* Seats */}
+            
             <div>
               <p className="text-sm text-slate-400">
                 Seats
@@ -107,13 +108,10 @@ const BookingSuccessPage = () => {
               <div className="flex flex-wrap gap-2 mt-2">
                 {selectedSeats?.map((seat, index) => (
                   <span
-                    key={seat.id || seat.showSeatId || index}
+                    key={seat.id || index}
                     className="px-3 py-1.5 rounded-lg bg-red-600/20 text-red-400 border border-red-500/30"
                   >
-                    {seat.seatNumber ||
-                      seat.seat?.seatNumber ||
-                      seat.number ||
-                      seat}
+                    {seat.rowName}{seat.seatNumber}
                   </span>
                 ))}
               </div>

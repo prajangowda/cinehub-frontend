@@ -8,7 +8,11 @@ import {
   MapPin,
   Ticket,
 } from "lucide-react";
-import axios from "axios";
+import {
+  createPaymentOrder,
+  reserveSeats,
+  verifyPayment,
+} from "../services/bookingService";
 
 const BookingSummaryPage = () => {
   const location = useLocation();
@@ -56,45 +60,160 @@ const BookingSummaryPage = () => {
    * The backend is responsible for the actual booking amount.
    */
   const ticketPrice = selectedSeats.length * 200;
-  const convenienceFee = 30;
-  const estimatedTotal = ticketPrice + convenienceFee;
+  const estimatedTotal = ticketPrice;
 
-  const handleProceedToPayment  = async () => {
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+      const existingScript = document.querySelector(
+        'script[src="https://checkout.razorpay.com/v1/checkout.js"]'
+      );
+
+      if (existingScript) {
+        resolve(true);
+        return;
+      }
+
+      const script = document.createElement("script");
+
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+
+      script.onload = () => resolve(true);
+
+      script.onerror = () => resolve(false);
+
+      document.body.appendChild(script);
+    });
+  };
+
+  const handleProceedToPayment = async () => {
     try {
       setLoading(true);
       setError("");
 
-      const request = {
+      // 1. Load Razorpay Checkout
+      const razorpayLoaded = await loadRazorpayScript();
+
+      if (!razorpayLoaded) {
+        throw new Error("Unable to load Razorpay. Please check your internet connection.");
+      }
+
+      // 2. Reserve seats temporarily
+      const reservationRequest = {
         showId: Number(showId),
         showSeatIds: selectedSeats.map((seat) => seat.id),
       };
 
-      const response = await axios.post(
-        "http://localhost:8080/api/v1/bookings",
-        request,
-        {
-          withCredentials: true,
-        }
-      );
+      
 
-      navigate("/booking-success", {
-        state: {
-          booking: response.data,
-          showInfo,
-          selectedSeats,
+      const reservation = await reserveSeats(reservationRequest);
+
+      
+
+
+
+      // 3. Create Razorpay Order
+      const order = await createPaymentOrder(reservation.reservationToken);
+
+
+
+      // 4. Razorpay Checkout options
+      const options = {
+        key: "rzp_test_TVFoqm7iToIFVx",
+
+        amount: order.amount,
+
+        currency: order.currency,
+
+        name: "Movie Booking",
+
+        description: `${showInfo?.movieTitle || "Movie"} Tickets`,
+
+        order_id: order.id,
+
+        handler: async function (response) {
+          try {
+           
+
+            // Send Razorpay payment details to Spring Boot
+            const verifyResponse = await verifyPayment({
+              razorpayPaymentId: response.razorpay_payment_id,
+              razorpayOrderId: response.razorpay_order_id,
+              razorpaySignature: response.razorpay_signature,
+              bookingId: order.bookingId,
+            });
+
+          
+
+            // Payment verified successfully
+            if (verifyResponse.success) {
+
+              alert("Payment successful! Booking confirmed! ");
+
+              // Navigate to booking success page
+              navigate("/booking-success", {
+                state: {
+                  booking: {
+                    bookingId: verifyResponse.bookingId,
+                    status: "CONFIRMED",
+                    totalAmount: reservation.totalAmount,
+                  },
+                  showInfo: showInfo,
+                  selectedSeats: selectedSeats,
+                },
+              });
+
+            } else {
+
+              alert(
+                verifyResponse.message ||
+                "Payment verification failed!"
+              );
+
+            }
+
+          } catch (error) {
+
+           
+
+            alert(
+              error.response?.data?.message ||
+              "Payment verification failed. Please contact support."
+            );
+
+          }
         },
-      });
+
+        theme: {
+          color: "#dc2626",
+        },
+
+        modal: {
+          ondismiss: function () {
+           
+            setLoading(false);
+          },
+        },
+      };
+
+      // 5. Open Razorpay Checkout
+      const razorpay = new window.Razorpay(options);
+
+      razorpay.open();
+
     } catch (err) {
-      console.error("Booking failed:", err);
+      
 
       setError(
         err.response?.data?.message ||
-          "Unable to complete booking. Please try again."
+        "Unable to proceed to payment. Please try again."
       );
+
     } finally {
       setLoading(false);
     }
   };
+
+
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
@@ -307,15 +426,7 @@ const BookingSummaryPage = () => {
                   </span>
                 </div>
 
-                <div className="flex justify-between text-sm">
-                  <span className="text-slate-400">
-                    Convenience fee
-                  </span>
-
-                  <span>
-                    ₹{convenienceFee}
-                  </span>
-                </div>
+                
 
                 <div className="border-t border-slate-800 pt-4">
 
@@ -344,7 +455,7 @@ const BookingSummaryPage = () => {
 
               {/* Confirm */}
               <button
-                onClick={handleProceedToPayment }
+                onClick={handleProceedToPayment}
                 disabled={loading}
                 className="w-full mt-6 py-3.5 rounded-xl bg-red-600 hover:bg-red-700 disabled:bg-red-900 disabled:text-red-300 font-semibold transition flex items-center justify-center gap-2"
               >
@@ -352,9 +463,9 @@ const BookingSummaryPage = () => {
                   <>
                     <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                     Proceeding to Payment...
-                    </>
-                  ) : (
-                    <>
+                  </>
+                ) : (
+                  <>
                     <CheckCircle2 size={19} />
                     Proceed to Payment
                   </>

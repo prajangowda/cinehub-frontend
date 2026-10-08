@@ -37,7 +37,8 @@ function AppRoutes() {
           <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
           <Route path="/owner/request" element={<ProtectedRoute><RequestTheatrePage /></ProtectedRoute>} />
           <Route path="/theatres" element={<OwnerRoute><TheatreDashboardPage /></OwnerRoute>} />
-          <Route path="/404" element={<NotFoundPage />} />
+          
+          <Route path="" element={<NotFoundPage />} />
         </Route>
 
         <Route element={<AuthLayout />}>

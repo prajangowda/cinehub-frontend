@@ -83,7 +83,7 @@ function HomePage() {
 
 
   const featuredMovie = featuredMovies[0];
-   console.log(featuredMovies[0]);
+   
 
   return (
 

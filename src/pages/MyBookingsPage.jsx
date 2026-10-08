@@ -28,7 +28,7 @@ const MyBookingsPage = () => {
           }
         );
 
-        console.log("My bookings:", response.data);
+        
 
         setBookings(response.data);
       } catch (error) {

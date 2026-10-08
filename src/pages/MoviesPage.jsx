@@ -41,7 +41,7 @@ function MoviesPage() {
           size: 12
         });
 
-        console.log('Pagination response:', data);
+        
 
         if (isMounted) {
           setMovies(data.movies);

@@ -202,7 +202,7 @@ const BookingSummaryPage = () => {
 
     } catch (err) {
       setError(
-        err.response?.status === 401
+        err.response === Unauthorized
           ? "Please log in to continue payment."
           : err.response?.data?.message ||
             "Unable to proceed to payment. Please try again."

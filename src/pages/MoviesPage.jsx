@@ -14,6 +14,7 @@ function MoviesPage() {
   const [genre, setGenre] = useState('All');
   const [sortBy, setSortBy] = useState('rating');
   const [sortOrder, setSortOrder] = useState('desc');
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
 
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
@@ -168,33 +169,105 @@ function MoviesPage() {
         title="Browse the CineHub movie lineup"
         description="Search and explore featured titles with instant page-based navigation and loading states."
         labelClassName="!text-white"
+        titleClassName="!text-2xl sm:!text-5xl"
+        descriptionClassName="hidden sm:block"
       />
 
 
       {/* SEARCH + FILTERS */}
 
-      <div className="rounded-3xl border border-slate-800 bg-[#101010] p-5 shadow-xl shadow-black/20 lg:grid lg:grid-cols-[1.5fr_1fr] lg:gap-5 xl:grid-cols-[1.7fr_1fr]">
+      <div className="rounded-3xl border border-slate-800 bg-[#101010] p-3 shadow-xl shadow-black/20 sm:p-5 lg:grid lg:grid-cols-[1.5fr_1fr] lg:gap-5 xl:grid-cols-[1.7fr_1fr]">
 
-        <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center lg:mb-0">
+        <div
+          className="relative mb-0 flex min-w-0 flex-col gap-4 sm:mb-5 sm:flex-row sm:items-center lg:mb-0"
+          onKeyDownCapture={(event) => {
+            if (event.key === 'Enter') {
+              setShowMobileFilters(false);
+              if (event.target instanceof HTMLInputElement && event.target.type === 'search') {
+                event.target.blur();
+              }
+            }
+          }}
+        >
 
           <SearchInput
             placeholder="Search by title, genre, or tag"
             value={query}
+            onFocus={() => setShowMobileFilters(true)}
+            onClick={() => setShowMobileFilters(true)}
             onChange={(event) => {
               setQuery(event.target.value);
               setPage(0);
             }}
-            className="max-w-xl"
+            className="max-w-none sm:max-w-xl"
           />
 
-          <p className="text-sm text-slate-400">
+          <p className="hidden text-sm text-slate-400 sm:block">
             Showing {sortedMovies.length} of {totalElements} titles
           </p>
+
+          {showMobileFilters && (
+            <div className="absolute left-0 right-0 top-full z-20 mt-2 grid gap-3 rounded-2xl border border-slate-800 bg-[#101010] p-4 shadow-2xl shadow-black/50 sm:hidden">
+              <label className="block text-sm text-slate-300">
+                Genre
+                <select
+                  value={genre}
+                  onChange={(event) => {
+                    setGenre(event.target.value);
+                    setPage(0);
+                  }}
+                  className="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950/95 px-4 py-3 text-sm text-white outline-none focus:border-brand-400"
+                >
+                  {genres.map((value) => (
+                    <option key={value} value={value}>
+                      {value}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <div className="grid grid-cols-2 gap-3">
+                <label className="block text-sm text-slate-300">
+                  Sort by
+                  <select
+                    value={sortBy}
+                    onChange={(event) => {
+                      setSortBy(event.target.value);
+                      setPage(0);
+                    }}
+                    className="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950/95 px-3 py-3 text-sm text-white outline-none focus:border-brand-400"
+                  >
+                    <option value="rating">Rating</option>
+                    <option value="year">Year</option>
+                    <option value="title">Title</option>
+                  </select>
+                </label>
+
+                <label className="block text-sm text-slate-300">
+                  Order
+                  <select
+                    value={sortOrder}
+                    onChange={(event) => {
+                      setSortOrder(event.target.value);
+                      setPage(0);
+                    }}
+                    className="mt-2 w-full rounded-xl border border-slate-800 bg-slate-950/95 px-3 py-3 text-sm text-white outline-none focus:border-brand-400"
+                  >
+                    <option value="desc">Descending</option>
+                    <option value="asc">Ascending</option>
+                  </select>
+                </label>
+              </div>
+              <p className="text-xs text-slate-500">
+                Showing {sortedMovies.length} of {totalElements} titles
+              </p>
+            </div>
+          )}
 
         </div>
 
 
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="hidden gap-3 sm:grid sm:grid-cols-3">
 
           {/* GENRE */}
 

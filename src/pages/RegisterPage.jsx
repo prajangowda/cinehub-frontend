@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Eye, EyeOff } from 'lucide-react';
 import useAuth from '../hooks/useAuth.js';
 import { extractUser, isAdminUser } from '../auth/AuthContext.jsx';
 import { verifyOtp, resendOtp, getCurrentUser } from '../api/authApi.js';
@@ -8,6 +9,7 @@ function RegisterPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [otpPhase, setOtpPhase] = useState(false);
@@ -126,12 +128,23 @@ function RegisterPage() {
           </label>
           <label className="block text-sm text-slate-300">
             Password
-            <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-              className="mt-2 w-full rounded-xl border border-slate-800 bg-[#111111] px-4 py-3 text-white outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
-            />
+            <span className="relative mt-2 block">
+              <input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type={showPassword ? 'text' : 'password'}
+                className="w-full rounded-xl border border-slate-800 bg-[#111111] px-4 py-3 pr-12 text-white outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((visible) => !visible)}
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                aria-pressed={showPassword}
+                className="absolute inset-y-0 right-0 flex items-center px-4 text-slate-400 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-300"
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </span>
           </label>
           <button
             type="submit"

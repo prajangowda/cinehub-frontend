@@ -16,7 +16,7 @@ function MainLayout() {
   return (
     <div className="flex min-h-screen flex-col">
       <header className={`border-b backdrop-blur-sm ${isHomePage ? "border-[#242424] bg-[#090909]/95" : "border-[#292929] bg-[#090909]/95 shadow-lg shadow-black/20"}`}>
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-4">
 
           {/* Logo */}
           <Link to="/" aria-label="CineHub home" className="shrink-0">
@@ -24,7 +24,7 @@ function MainLayout() {
           </Link>
 
           {/* Navigation */}
-          <nav className="flex max-w-[78%] flex-wrap items-center justify-end gap-x-4 gap-y-2 text-xs text-slate-300 sm:text-sm">
+          <nav className="flex w-full max-w-none flex-wrap items-center justify-start gap-x-4 gap-y-2 text-xs text-slate-300 sm:w-auto sm:max-w-[78%] sm:justify-end sm:text-sm">
 
             <Link to="/" className={`transition hover:text-white ${isHomePage ? "text-white" : "hover:text-brand-300"}`}>
               Home
@@ -100,14 +100,14 @@ function MainLayout() {
         </div>
       </header>
 
-      <main className={`flex-1 ${isHomePage ? "bg-[#0a0a0a]" : "bg-[#080808] px-4 py-8 sm:px-6"}`}>
+      <main className={`min-w-0 flex-1 ${isHomePage ? "bg-[#0a0a0a]" : "bg-[#080808] px-4 py-6 sm:px-6 sm:py-8"}`}>
         <div className={isHomePage ? "w-full" : "mx-auto w-full max-w-7xl"}>
           <Outlet />
         </div>
       </main>
 
       <footer className="border-t border-[#242424] bg-[#090909]">
-        <div className="py-6 text-center text-sm text-slate-500">
+        <div className="px-4 py-6 text-center text-sm text-slate-500">
           © {new Date().getFullYear()} CineHub. All rights reserved.
         </div>
       </footer>

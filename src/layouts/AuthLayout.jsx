@@ -17,9 +17,9 @@ function AuthLayout() {
           </Link>
         </div>
       </header>
-      <main className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden bg-[#080808] px-4 py-12">
+      <main className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden bg-[#080808] px-4 py-8 sm:py-12">
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-500/35 to-transparent" />
-        <div className="w-full max-w-md rounded-3xl border border-[#303030] bg-[#111111]/95 p-8 shadow-2xl shadow-black/50 sm:p-10">
+        <div className="w-full max-w-md rounded-3xl border border-[#303030] bg-[#111111]/95 p-6 shadow-2xl shadow-black/50 sm:p-10">
           <Outlet />
         </div>
       </main>

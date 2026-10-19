@@ -699,10 +699,10 @@ function AdminDashboardPage() {
 
                   <li
                     key={req.id}
-                    className="flex items-start justify-between rounded-2xl border border-slate-800 bg-slate-900/80 p-4"
+                    className="flex flex-col items-start gap-3 rounded-2xl border border-slate-800 bg-slate-900/80 p-4 sm:flex-row sm:justify-between"
                   >
 
-                    <div className="max-w-[70%]">
+                    <div className="w-full min-w-0 sm:max-w-[70%]">
 
                       <div className="text-sm text-slate-300">
                         {req.businessName ||
@@ -746,7 +746,7 @@ function AdminDashboardPage() {
 
                     {/* ACTION BUTTONS */}
 
-                    <div className="flex gap-2">
+                    <div className="flex flex-wrap gap-2">
 
                       {/* APPROVE */}
 

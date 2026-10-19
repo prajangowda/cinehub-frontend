@@ -233,7 +233,7 @@ const BookingSummaryPage = () => {
       </header>
 
       {/* Main */}
-      <main className="max-w-6xl mx-auto px-5 py-10 pb-16">
+      <main className="mx-auto max-w-6xl px-4 py-8 pb-16 sm:px-5 sm:py-10">
 
         {/* Title */}
         <div className="mb-8 border-l-2 border-brand-500 pl-5">
@@ -241,7 +241,7 @@ const BookingSummaryPage = () => {
             CHECKOUT
           </p>
 
-          <h1 className="text-3xl md:text-4xl font-bold mt-2">
+          <h1 className="mt-2 text-2xl font-bold sm:text-3xl md:text-4xl">
             Booking Summary
           </h1>
 
@@ -256,7 +256,7 @@ const BookingSummaryPage = () => {
           <div className="lg:col-span-2 space-y-6">
 
             {/* Movie / Show Card */}
-            <section className="rounded-3xl border border-slate-800 bg-[#111111] p-6 shadow-xl shadow-black/20">
+            <section className="rounded-3xl border border-slate-800 bg-[#111111] p-4 shadow-xl shadow-black/20 sm:p-6">
 
               <div className="flex items-start justify-between gap-4">
 
@@ -353,7 +353,7 @@ const BookingSummaryPage = () => {
             </section>
 
             {/* Selected Seats */}
-            <section className="rounded-3xl border border-slate-800 bg-[#111111] p-6 shadow-xl shadow-black/20">
+            <section className="rounded-3xl border border-slate-800 bg-[#111111] p-4 shadow-xl shadow-black/20 sm:p-6">
 
               <div className="flex items-center justify-between mb-6">
 
@@ -407,7 +407,7 @@ const BookingSummaryPage = () => {
           {/* RIGHT - PRICE */}
           <aside>
 
-            <div className="rounded-3xl border border-brand-500/20 bg-[#111111] p-6 shadow-2xl shadow-black/30 lg:sticky lg:top-6">
+            <div className="rounded-3xl border border-brand-500/20 bg-[#111111] p-4 shadow-2xl shadow-black/30 sm:p-6 lg:sticky lg:top-6">
 
               <h2 className="text-lg font-semibold mb-6">
                 Price Details

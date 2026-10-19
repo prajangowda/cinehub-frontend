@@ -202,7 +202,7 @@ function MovieDetailsPage() {
 
       {/* ================= HERO SECTION ================= */}
 
-      <section className="relative min-h-[600px] overflow-hidden border-b border-white/5">
+      <section className="relative min-h-[520px] overflow-hidden border-b border-white/5 sm:min-h-[600px]">
 
 
         {/* Background Image */}
@@ -235,10 +235,10 @@ function MovieDetailsPage() {
 
         {/* Content */}
 
-        <div className="relative max-w-7xl mx-auto px-6 py-12 lg:py-24">
+        <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:py-24">
 
 
-          <div className="flex flex-col md:flex-row gap-8 lg:gap-12 items-start">
+          <div className="flex flex-col items-center gap-6 md:flex-row md:items-start lg:gap-12">
 
 
             {/* Movie Poster */}
@@ -248,7 +248,8 @@ function MovieDetailsPage() {
               <div
                 className="
                   relative
-                  w-52
+                  w-44
+                  sm:w-52
                   md:w-60
                   aspect-[2/3]
                   rounded-2xl
@@ -293,7 +294,7 @@ function MovieDetailsPage() {
 
             {/* Movie Information */}
 
-            <div className="max-w-3xl pt-2">
+            <div className="w-full min-w-0 max-w-3xl pt-2">
 
 
               <p className="text-red-400 text-sm font-semibold tracking-[0.2em] uppercase mb-3">
@@ -301,7 +302,7 @@ function MovieDetailsPage() {
               </p>
 
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
                 {movie?.title}
               </h1>
 
@@ -460,7 +461,7 @@ function MovieDetailsPage() {
       >
 
 
-        <div className="max-w-7xl mx-auto px-6 py-14">
+        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
 
 
           {/* ================= HEADING ================= */}

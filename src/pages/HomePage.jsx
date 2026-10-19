@@ -113,7 +113,7 @@ function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
-            className="flex flex-col justify-center p-7 sm:p-12 lg:p-16"
+            className="flex flex-col justify-center p-4 sm:p-12 lg:p-16"
           >
 
             <div className="max-w-xl space-y-7">
@@ -226,7 +226,7 @@ function HomePage() {
                   <img
                     src={featuredMovie.image}
                     alt={featuredMovie.title}
-                    className="relative z-10 h-[390px] max-h-[65vh] w-auto max-w-full object-contain drop-shadow-[0_24px_60px_rgba(0,0,0,0.8)] sm:h-[440px] lg:h-[500px]"
+                    className="relative z-10 h-[280px] max-h-[65vh] w-auto max-w-full object-contain drop-shadow-[0_24px_60px_rgba(0,0,0,0.8)] sm:h-[440px] lg:h-[500px]"
                   />
                 )}
 

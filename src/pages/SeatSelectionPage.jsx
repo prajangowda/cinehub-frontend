@@ -195,7 +195,7 @@ const SeatSelectionPage = () => {
             </section>
 
             {/* Main */}
-            <main className="max-w-7xl mx-auto px-5 py-10 pb-32">
+            <main className="mx-auto max-w-7xl px-3 py-8 pb-32 sm:px-5 sm:py-10">
 
                 {/* Screen */}
                 <div className="max-w-2xl mx-auto mb-12">
@@ -218,9 +218,10 @@ const SeatSelectionPage = () => {
                         No seats available for this show.
                     </div>
                 ) : (
-                    <div className="max-w-3xl mx-auto space-y-5">
+                    <div className="mx-auto max-w-3xl space-y-5 overflow-x-auto pb-2">
 
-                        {Object.entries(groupedSeats).map(
+                            <div className="min-w-max space-y-5">
+                            {Object.entries(groupedSeats).map(
                             ([rowName, rowSeats]) => (
 
                                 <div
@@ -309,6 +310,7 @@ const SeatSelectionPage = () => {
                             )
                         )}
 
+                        </div>
                     </div>
                 )}
 

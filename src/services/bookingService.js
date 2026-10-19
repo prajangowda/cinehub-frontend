@@ -28,7 +28,7 @@ export async function verifyPayment(payload) {
 }
 
 export async function fetchBookings() {
-  const response = await apiClient.get('/bookings');
+  const response = await apiClient.get('/bookings/my-bookings');
   return response.data;
 }
 

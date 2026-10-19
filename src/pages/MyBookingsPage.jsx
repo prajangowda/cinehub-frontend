@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { fetchBookings } from "../services/bookingService";
 import {
   CalendarDays,
   Clock,
@@ -21,16 +21,8 @@ const MyBookingsPage = () => {
       try {
         setLoading(true);
 
-        const response = await axios.get(
-          "http://localhost:8080/api/v1/bookings/my-bookings",
-          {
-            withCredentials: true,
-          }
-        );
-
-        
-
-        setBookings(response.data);
+        const bookings = await fetchBookings();
+        setBookings(bookings);
       } catch (error) {
         console.error("Failed to fetch bookings:", error);
 

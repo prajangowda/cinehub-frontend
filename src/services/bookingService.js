@@ -1,7 +1,7 @@
 import apiClient from './apiClient.js';
 
 export async function fetchShow(showId) {
-  const response = await apiClient.get(`/shows/${showId}`);
+  const response = await apiClient.get(`/public/shows/${showId}`);
   return response.data;
 }
 

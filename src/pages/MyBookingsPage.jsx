@@ -17,7 +17,7 @@ const MyBookingsPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchBookings = async () => {
+    const loadBookings = async () => {
       try {
         setLoading(true);
 
@@ -35,7 +35,7 @@ const MyBookingsPage = () => {
       }
     };
 
-    fetchBookings();
+    loadBookings();
   }, []);
 
   const getStatusStyle = (status) => {

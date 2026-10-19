@@ -201,13 +201,12 @@ const BookingSummaryPage = () => {
       razorpay.open();
 
     } catch (err) {
-      
-
       setError(
-        err.response?.data?.message ||
-        "Unable to proceed to payment. Please try again."
+        err.response?.status === 401
+          ? "Please log in to continue payment."
+          : err.response?.data?.message ||
+            "Unable to proceed to payment. Please try again."
       );
-
     } finally {
       setLoading(false);
     }

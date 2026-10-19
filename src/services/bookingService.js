@@ -6,7 +6,7 @@ export async function fetchShow(showId) {
 }
 
 export async function fetchShowSeats(showId) {
-  const response = await apiClient.get(`/shows/${showId}/seats`);
+  const response = await apiClient.get(`/public/shows/${showId}/seats`);
   return response.data;
 }
 

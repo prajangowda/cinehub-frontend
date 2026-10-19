@@ -5,7 +5,7 @@ export function Input({ label, error, icon, className = '', containerClassName =
       <div className="relative mt-2">
         {icon && <span className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-slate-500">{icon}</span>}
         <input
-          className={`w-full rounded-2xl border border-slate-800 bg-slate-950/95 px-4 py-3 text-sm text-white outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-500/20 ${icon ? 'pl-12' : ''} ${className}`}
+          className={`w-full rounded-xl border border-slate-800 bg-[#111111] px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 ${icon ? 'pl-12' : ''} ${className}`}
           {...props}
         />
       </div>

@@ -81,7 +81,7 @@ const MyBookingsPage = () => {
   if (error) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
-        <div className="max-w-md rounded-2xl border border-slate-800 bg-slate-900/60 p-8 text-center">
+        <div className="cinehub-page max-w-md rounded-3xl border border-slate-800 bg-[#111111] p-8 text-center shadow-2xl shadow-black/40">
 
           <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-slate-800">
             <Ticket className="h-6 w-6 text-slate-400" />
@@ -107,13 +107,13 @@ const MyBookingsPage = () => {
   }
 
   return (
-    <div className="pb-10">
+    <div className="cinehub-page pb-10">
 
       {/* Header */}
       <div className="mb-8 flex flex-col gap-2">
 
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-500/10">
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-brand-500/20 bg-brand-500/10">
             <Ticket className="h-5 w-5 text-brand-400" />
           </div>
 
@@ -139,7 +139,7 @@ const MyBookingsPage = () => {
 
       {/* Empty State */}
       {bookings.length === 0 ? (
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/50 px-6 py-16 text-center">
+        <div className="rounded-3xl border border-slate-800 bg-[#111111] px-6 py-16 text-center shadow-xl shadow-black/20">
 
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-800">
             <Film className="h-7 w-7 text-slate-400" />
@@ -171,7 +171,7 @@ const MyBookingsPage = () => {
 
             <div
               key={booking.bookingId}
-              className="group rounded-2xl border border-slate-800 bg-slate-900/50 transition hover:border-slate-700 hover:bg-slate-900"
+              className="group rounded-3xl border border-slate-800 bg-[#111111] transition duration-200 hover:border-brand-500/35 hover:bg-[#151515]"
             >
 
               <div className="flex flex-col gap-6 p-6 lg:flex-row lg:items-center lg:justify-between">

@@ -4,9 +4,9 @@ export function Modal({ open, title, onClose, children, footer, className = '', 
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm" onClick={onClose}>
       <div
-        className={`w-full max-w-2xl overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-950/95 shadow-2xl shadow-slate-950/40 ${className}`}
+        className={`w-full max-w-2xl overflow-hidden rounded-3xl border border-[#333333] bg-[#111111] shadow-2xl shadow-black/60 ${className}`}
         onClick={(event) => event.stopPropagation()}
         {...props}
       >
@@ -15,7 +15,7 @@ export function Modal({ open, title, onClose, children, footer, className = '', 
           <button
             type="button"
             onClick={onClose}
-            className="rounded-full p-2 text-slate-400 transition hover:bg-slate-900 hover:text-white"
+            className="rounded-full p-2 text-slate-400 transition hover:bg-brand-500/10 hover:text-brand-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-400"
             aria-label="Close modal"
           >
             <X className="h-4 w-4" />

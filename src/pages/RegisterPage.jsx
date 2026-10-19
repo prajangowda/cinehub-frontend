@@ -97,9 +97,10 @@ function RegisterPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="cinehub-page space-y-6">
       <div>
-        <h1 className="text-3xl font-semibold text-white">Create account</h1>
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-300">Join the experience</p>
+        <h1 className="text-3xl font-semibold tracking-tight text-white">Create account</h1>
         <p className="mt-2 text-slate-400">Join CineHub to start booking instantly.</p>
       </div>
       {!otpPhase ? (
@@ -111,7 +112,7 @@ function RegisterPage() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               type="text"
-              className="mt-2 w-full rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3 text-white outline-none focus:border-brand-400"
+              className="mt-2 w-full rounded-xl border border-slate-800 bg-[#111111] px-4 py-3 text-white outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
             />
           </label>
           <label className="block text-sm text-slate-300">
@@ -120,7 +121,7 @@ function RegisterPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               type="email"
-              className="mt-2 w-full rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3 text-white outline-none focus:border-brand-400"
+              className="mt-2 w-full rounded-xl border border-slate-800 bg-[#111111] px-4 py-3 text-white outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
             />
           </label>
           <label className="block text-sm text-slate-300">
@@ -129,13 +130,13 @@ function RegisterPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               type="password"
-              className="mt-2 w-full rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3 text-white outline-none focus:border-brand-400"
+              className="mt-2 w-full rounded-xl border border-slate-800 bg-[#111111] px-4 py-3 text-white outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
             />
           </label>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full rounded-2xl bg-brand-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-brand-400 disabled:cursor-not-allowed disabled:opacity-60"
+            className="w-full rounded-xl bg-brand-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-900/30 transition hover:bg-brand-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-300 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSubmitting ? 'Sending OTP...' : 'Register'}
           </button>
@@ -153,7 +154,7 @@ function RegisterPage() {
               value={otpCode}
               onChange={(e) => setOtpCode(e.target.value)}
               type="text"
-              className="mt-2 w-full rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3 text-white outline-none focus:border-brand-400"
+              className="mt-2 w-full rounded-xl border border-slate-800 bg-[#111111] px-4 py-3 text-white outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
             />
           </label>
           <div className="flex items-center gap-2">

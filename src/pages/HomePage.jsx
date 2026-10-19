@@ -2,11 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-import { Button } from "../components/Button.jsx";
-import { SearchInput } from "../components/SearchInput.jsx";
-import { SectionHeading } from "../components/SectionHeading.jsx";
 import { Pagination } from "../components/Pagination.jsx";
-import { MovieCard } from "../components/MovieCard.jsx";
+import useAuth from "../hooks/useAuth.js";
 
 import { fetchMovies } from "../services/movieService.js";
 
@@ -14,6 +11,7 @@ import { fetchMovies } from "../services/movieService.js";
 function HomePage() {
 
   const navigate = useNavigate();
+  const { isAdmin, isOwner } = useAuth();
 
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -83,31 +81,28 @@ function HomePage() {
 
 
   const featuredMovie = featuredMovies[0];
-   
 
   return (
-
-    <div className="space-y-20 pb-12">
+    <div className="pb-12">
 
 
       {/* ========================================================
           HERO
       ======================================================== */}
 
-      <section className="relative overflow-hidden rounded-[2rem] border border-white/[0.06] bg-[#0b0b0f]">
+      <section className="relative isolate overflow-hidden bg-[#080808]">
+        {featuredMovie?.image && (
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url("${featuredMovie.image}")` }}
+          />
+        )}
+        <div className="pointer-events-none absolute inset-0 bg-black/50" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/45" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-black/25" />
 
-        {/* Ambient background */}
-
-        <div className="pointer-events-none absolute inset-0">
-
-          <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-brand-500/10 blur-3xl" />
-
-          <div className="absolute -bottom-40 left-1/3 h-96 w-96 rounded-full bg-purple-500/10 blur-3xl" />
-
-        </div>
-
-
-        <div className="relative grid min-h-[520px] lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="relative mx-auto grid min-h-[540px] w-full max-w-7xl items-center gap-8 px-5 py-12 sm:px-8 lg:min-h-[620px] lg:grid-cols-[1fr_0.78fr] lg:gap-4 lg:px-12 lg:py-14">
 
 
           {/* ====================================================
@@ -118,17 +113,17 @@ function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
-            className="flex flex-col justify-center p-8 sm:p-12 lg:p-16"
+            className="flex flex-col justify-center p-7 sm:p-12 lg:p-16"
           >
 
             <div className="max-w-xl space-y-7">
 
               <div className="flex items-center gap-3">
 
-                <span className="h-px w-8 bg-brand-400" />
+                <span className="h-px w-8 bg-[#f12b3b]" />
 
-                <span className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-300">
-                  CineHub
+                <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#ff6571]">
+                  {featuredMovie ? "Featured film" : "Welcome to CineHub"}
                 </span>
 
               </div>
@@ -136,47 +131,57 @@ function HomePage() {
 
               <div>
 
-                <h1 className="text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[4rem]">
-
-                  Your next great
-                  <span className="block text-brand-400">
-                    cinema experience.
-                  </span>
-
+                <h1 className="max-w-2xl text-4xl font-bold uppercase leading-[1.04] tracking-wide text-white sm:text-5xl lg:text-6xl">
+                  {featuredMovie?.title || "A better night at the movies"}
                 </h1>
 
               </div>
 
 
-              <p className="max-w-lg text-base leading-7 text-slate-400 sm:text-lg">
+              <div className="flex flex-wrap items-center gap-2">
+                {[featuredMovie?.year, featuredMovie?.genre, featuredMovie?.raw?.certificate]
+                  .filter(Boolean)
+                  .map((detail, index) => (
+                    <span
+                      key={`${detail}-${index}`}
+                      className={`px-2.5 py-1 text-xs font-semibold uppercase tracking-wide ${
+                        index === 0
+                          ? "bg-[#e7a51b] text-[#101820]"
+                          : index === 1
+                            ? "bg-[#1685a0] text-white"
+                            : "bg-[#bd4d32] text-white"
+                      }`}
+                    >
+                      {detail}
+                    </span>
+                  ))}
+                {featuredMovie?.rating > 0 && (
+                  <span className="px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-white">
+                    ★ {featuredMovie.rating.toFixed(1)}/10
+                  </span>
+                )}
+              </div>
 
-                Discover movies, explore theatres, choose your seats,
-                and book your next night out — all in one place.
-
+              <p className="max-w-lg text-base leading-7 text-slate-300 sm:text-lg">
+                {featuredMovie?.description ||
+                  "Discover what is showing, find your next favourite, and book your seats with CineHub."}
               </p>
-
-
-              {/* Search */}
-
-              
-
 
               {/* Actions */}
 
               <div className="flex flex-wrap items-center gap-3">
 
-                <Link to="/movies">
-
-                  <Button>
-                    Explore movies
-                  </Button>
-
+                <Link
+                  to={featuredMovie ? `/movies/${featuredMovie.id}` : "/movies"}
+                  className="inline-flex items-center justify-center bg-[#f12b3b] px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-[#d91d2c]"
+                >
+                  {featuredMovie ? "Explore film" : "Explore movies"}
                 </Link>
 
 
                 <Link
                   to="/movies"
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-5 py-3 text-sm font-medium text-slate-200 transition hover:border-white/20 hover:bg-white/[0.04]"
+                  className="inline-flex items-center gap-2 border border-[#536579] px-5 py-3 text-sm font-semibold text-slate-100 transition hover:border-white hover:bg-white/[0.06]"
                 >
 
                   View all movies
@@ -202,14 +207,14 @@ function HomePage() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.65, delay: 0.1 }}
-            className="relative min-h-[420px] lg:min-h-full"
+            className="relative flex min-h-[320px] items-center justify-center lg:min-h-[480px] lg:justify-end lg:pr-14"
           >
 
             {loading ? (
 
               <div className="absolute inset-0 flex items-center justify-center">
 
-                <div className="h-10 w-10 animate-spin rounded-full border-2 border-white/10 border-t-brand-400" />
+                <div className="h-10 w-10 animate-spin rounded-full border-2 border-white/10 border-t-[#f12b3b]" />
 
               </div>
 
@@ -217,98 +222,14 @@ function HomePage() {
 
               <>
 
-                {/* Poster */}
-                 
                 {featuredMovie.image && (
-
-                 
                   <img
                     src={featuredMovie.image}
                     alt={featuredMovie.title}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="relative z-10 h-[390px] max-h-[65vh] w-auto max-w-full object-contain drop-shadow-[0_24px_60px_rgba(0,0,0,0.8)] sm:h-[440px] lg:h-[500px]"
                   />
-
                 )}
 
-
-                {/* Cinematic overlays */}
-
-                <div className="absolute inset-0 bg-gradient-to-r from-[#0b0b0f] via-[#0b0b0f]/35 to-transparent" />
-
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b0f] via-transparent to-[#0b0b0f]/20" />
-
-
-                {/* Movie information */}
-
-                <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-10">
-
-                  <div className="max-w-md">
-
-                    <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-brand-300">
-                      Now showing
-                    </p>
-
-
-                    <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-
-                      {featuredMovie.title}
-
-                    </h2>
-
-
-                    <div className="mt-4 flex flex-wrap items-center gap-2 text-sm text-slate-300">
-
-                      {featuredMovie.genre && (
-                        <span>
-                          {featuredMovie.genre}
-                        </span>
-                      )}
-
-                      {featuredMovie.duration && (
-                        <>
-                          <span className="text-slate-600">
-                            •
-                          </span>
-
-                          <span>
-                            {featuredMovie.duration} min
-                          </span>
-                        </>
-                      )}
-
-                      {featuredMovie.certificate && (
-                        <>
-                          <span className="text-slate-600">
-                            •
-                          </span>
-
-                          <span>
-                            {featuredMovie.certificate}
-                          </span>
-                        </>
-                      )}
-
-                    </div>
-
-
-                    <button
-                      onClick={() =>
-                        navigate(`/movies/${featuredMovie.id}`)
-                      }
-                      className="mt-6 inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-200"
-                    >
-
-                      Book tickets
-
-                      <span>
-                        →
-                      </span>
-
-                    </button>
-
-                  </div>
-
-                </div>
 
               </>
 
@@ -330,6 +251,7 @@ function HomePage() {
 
       </section>
 
+      <div className="mx-auto w-full max-w-7xl space-y-12 px-4 pt-10 sm:px-6">
 
       {/* ========================================================
           ERROR
@@ -350,101 +272,74 @@ function HomePage() {
           MOVIES
       ======================================================== */}
 
-      <section className="space-y-8">
-
-
-        {/* Heading */}
-
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-
-          <SectionHeading
-            label="Now showing"
-            title="Movies worth watching"
-            description="Find something for your next cinema visit."
-          />
-
-
+      <section className="space-y-6">
+        <div className="flex items-end justify-between border-b border-[#2b2b2b] pb-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6571]">
+              CineHub picks
+            </p>
+            <h2 className="mt-2 text-2xl font-semibold text-white sm:text-3xl">
+              Now showing
+            </h2>
+          </div>
           <Link
             to="/movies"
-            className="hidden shrink-0 text-sm font-medium text-brand-300 transition hover:text-brand-200 sm:block"
+            className="text-sm font-semibold text-slate-300 transition hover:text-white"
           >
-
-            See all movies
-            <span className="ml-2">
-              →
-            </span>
-
+            All movies <span className="ml-1 text-[#f12b3b]">→</span>
           </Link>
-
         </div>
 
-
-        {/* Movie grid */}
-
-        <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-
-
-          {loading ? (
-
-            Array.from({ length: 6 }).map((_, index) => (
-
-              <div
-                key={index}
-                className="overflow-hidden rounded-2xl border border-white/[0.05] bg-slate-900/40"
-              >
-
-                <div className="aspect-[2/3] animate-pulse bg-slate-800/60" />
-
-                <div className="space-y-3 p-5">
-
-                  <div className="h-5 w-3/4 animate-pulse rounded bg-slate-800" />
-
-                  <div className="h-4 w-1/2 animate-pulse rounded bg-slate-800" />
-
-                  <div className="h-10 animate-pulse rounded-xl bg-slate-800" />
-
-                </div>
-
-              </div>
-
-            ))
-
-          ) : (
-
-            featuredMovies.slice(0, 6).map((movie) => (
-
-              <motion.div
-                key={movie.id}
-                initial={{
-                  opacity: 0,
-                  y: 15
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0
-                }}
-                transition={{
-                  duration: 0.35
-                }}
-              >
-
-                <MovieCard
-                  {...movie}
-                  onAction={() => {
-
-                    navigate(
-                      `/movies/${movie.id}`
-                    );
-
-                  }}
+        <div className="flex gap-4 overflow-x-auto pb-3 [scrollbar-color:#454545_transparent] [scrollbar-width:thin]">
+          {loading
+            ? Array.from({ length: 6 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="aspect-[2/3] w-56 shrink-0 animate-pulse bg-[#1b1b1b] sm:w-64"
                 />
-
-              </motion.div>
-
-            ))
-
-          )}
-
+              ))
+            : featuredMovies.slice(0, 6).map((movie, index) => (
+                <motion.button
+                  key={movie.id}
+                  type="button"
+                  onClick={() => navigate(`/movies/${movie.id}`)}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.04 }}
+                  className="group relative aspect-[2/3] w-56 shrink-0 overflow-hidden bg-[#1b1b1b] text-left sm:w-64"
+                  aria-label={`View ${movie.title}`}
+                >
+                  {movie.image ? (
+                    <img
+                      src={movie.image}
+                      alt=""
+                      loading="lazy"
+                      className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="flex h-full items-center justify-center p-4 text-center text-sm text-slate-400">
+                      {movie.title}
+                    </div>
+                  )}
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#050505] via-[#050505]/75 to-transparent p-3 pt-12">
+                    <h3 className="line-clamp-2 pr-16 text-sm font-semibold text-white">
+                      {movie.title}
+                    </h3>
+                    <p className="mt-1 text-xs text-slate-300">
+                      {movie.genre}{movie.year ? ` · ${movie.year}` : ""}
+                    </p>
+                  </div>
+                  {movie.rating > 0 && (
+                    <span
+                      aria-label={`Rating ${movie.rating.toFixed(1)} out of 10`}
+                      className="absolute bottom-3 right-3 rounded bg-black/80 px-2 py-1 text-xs font-semibold text-white"
+                    >
+                      <span className="mr-1 text-[#f5c451]" aria-hidden="true">★</span>
+                      {movie.rating.toFixed(1)}
+                    </span>
+                  )}
+                </motion.button>
+              ))}
         </div>
 
 
@@ -477,47 +372,49 @@ function HomePage() {
 
       </section>
 
-
-      {/* ========================================================
-          BOTTOM CTA
-      ======================================================== */}
-
-      <section className="relative overflow-hidden rounded-[2rem] border border-white/[0.06] bg-slate-900/50 px-6 py-14 text-center sm:px-10">
-
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-brand-500/[0.04] via-transparent to-purple-500/[0.04]" />
-
-        <div className="relative mx-auto max-w-2xl">
-
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-300">
+      <section className="grid gap-4 md:grid-cols-2">
+        <div className="border border-[#292929] bg-[#111111] p-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6571]">
             Plan your next outing
           </p>
-
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          <h2 className="mt-3 text-xl font-semibold text-white sm:text-2xl">
             Find a movie. Pick a seat. Enjoy the show.
           </h2>
-
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-slate-400 sm:text-base">
-            Browse the latest releases and discover shows playing
-            near you.
+          <p className="mt-3 text-sm leading-6 text-slate-400">
+            Browse the latest releases and discover shows playing near you.
           </p>
-
           <Link
             to="/movies"
-            className="mt-7 inline-flex items-center gap-2 rounded-xl bg-brand-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-400"
+            className="mt-5 inline-flex items-center gap-2 bg-[#f12b3b] px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-[#d91d2c]"
           >
-
             Browse movies
-
-            <span>
-              →
-            </span>
-
+            <span aria-hidden="true">→</span>
           </Link>
-
         </div>
 
+        {!isOwner && !isAdmin && (
+          <div className="flex flex-col items-start justify-between gap-5 border border-[#292929] bg-[#111111] p-6 sm:flex-row sm:items-center">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#ff6571]">
+                Partner with CineHub
+              </p>
+              <h2 className="mt-3 text-xl font-semibold text-white sm:text-2xl">
+                List your Theatre
+              </h2>
+              <p className="mt-3 text-sm leading-6 text-slate-400">
+                Reach more moviegoers by listing your theatre with us.
+              </p>
+            </div>
+            <Link
+              to="/owner/request"
+              className="shrink-0 bg-[#f12b3b] px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-[#d91d2c]"
+            >
+              Register Theatre
+            </Link>
+          </div>
+        )}
       </section>
-
+      </div>
     </div>
 
   );

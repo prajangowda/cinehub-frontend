@@ -9,7 +9,7 @@ const BookingSuccessPage = () => {
 
   if (!booking) {
     return (
-      <div className="min-h-screen bg-slate-950 text-white flex items-center justify-center">
+      <div className="cinehub-page min-h-screen bg-slate-950 text-white flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">
             Booking information not found
@@ -27,13 +27,13 @@ const BookingSuccessPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white px-4 py-10">
+    <div className="cinehub-page min-h-screen bg-slate-950 text-white px-4 py-10">
       <div className="max-w-3xl mx-auto">
 
         {/* Success Header */}
         <div className="text-center mb-10">
-          <div className="w-20 h-20 mx-auto mb-5 rounded-full bg-green-500/20 flex items-center justify-center">
-            <span className="text-4xl text-green-400">✓</span>
+          <div className="w-20 h-20 mx-auto mb-5 rounded-full border border-brand-500/30 bg-brand-500/10 flex items-center justify-center shadow-lg shadow-brand-900/20">
+            <span className="text-4xl text-brand-300">✓</span>
           </div>
 
           <h1 className="text-3xl md:text-4xl font-bold">
@@ -46,7 +46,7 @@ const BookingSuccessPage = () => {
         </div>
 
         {/* Booking Card */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
+        <div className="overflow-hidden rounded-3xl border border-slate-800 bg-[#111111] shadow-2xl shadow-black/35">
 
           {/* Booking Reference */}
           <div className="p-6 border-b border-slate-800 text-center">
@@ -54,7 +54,7 @@ const BookingSuccessPage = () => {
               Booking Reference
             </p>
 
-            <p className="text-2xl font-bold text-red-500 mt-1 tracking-wider">
+            <p className="text-2xl font-bold text-brand-300 mt-1 tracking-wider">
               {booking.bookingReference}
             </p>
           </div>
@@ -109,7 +109,7 @@ const BookingSuccessPage = () => {
                 {selectedSeats?.map((seat, index) => (
                   <span
                     key={seat.id || index}
-                    className="px-3 py-1.5 rounded-lg bg-red-600/20 text-red-400 border border-red-500/30"
+                    className="px-3 py-1.5 rounded-lg bg-brand-500/10 text-brand-200 border border-brand-500/30"
                   >
                     {seat.rowName}{seat.seatNumber}
                   </span>
@@ -123,7 +123,7 @@ const BookingSuccessPage = () => {
                 Status
               </span>
 
-              <span className="px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-sm font-medium">
+              <span className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 text-sm font-medium">
                 {booking.status}
               </span>
             </div>

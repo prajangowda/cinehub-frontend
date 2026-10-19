@@ -29,8 +29,8 @@ const BookingSummaryPage = () => {
 
   if (!showId || selectedSeats.length === 0) {
     return (
-      <div className="min-h-screen bg-slate-950 text-white flex items-center justify-center px-6">
-        <div className="text-center">
+      <div className="cinehub-page min-h-screen bg-slate-950 text-white flex items-center justify-center px-6">
+        <div className="max-w-md rounded-3xl border border-slate-800 bg-[#111111] p-8 text-center shadow-2xl shadow-black/40">
           <Ticket
             size={48}
             className="mx-auto mb-5 text-slate-600"
@@ -46,7 +46,7 @@ const BookingSummaryPage = () => {
 
           <button
             onClick={() => navigate(-1)}
-            className="px-6 py-3 rounded-xl bg-red-600 hover:bg-red-700 font-semibold"
+            className="px-6 py-3 rounded-xl bg-[#ff243d] hover:bg-[#df1c32] text-white font-semibold transition"
           >
             Select Seats
           </button>
@@ -216,10 +216,10 @@ const BookingSummaryPage = () => {
 
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="cinehub-page min-h-screen bg-slate-950 text-white">
 
       {/* Header */}
-      <header className="border-b border-slate-800">
+      <header className="border-b border-slate-800 bg-[#090909]/80">
         <div className="max-w-6xl mx-auto px-5 py-5">
 
           <button
@@ -237,8 +237,8 @@ const BookingSummaryPage = () => {
       <main className="max-w-6xl mx-auto px-5 py-10 pb-16">
 
         {/* Title */}
-        <div className="mb-8">
-          <p className="text-red-500 text-sm font-semibold tracking-wider">
+        <div className="mb-8 border-l-2 border-brand-500 pl-5">
+          <p className="text-brand-300 text-xs font-semibold tracking-[0.24em]">
             CHECKOUT
           </p>
 
@@ -257,7 +257,7 @@ const BookingSummaryPage = () => {
           <div className="lg:col-span-2 space-y-6">
 
             {/* Movie / Show Card */}
-            <section className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+            <section className="rounded-3xl border border-slate-800 bg-[#111111] p-6 shadow-xl shadow-black/20">
 
               <div className="flex items-start justify-between gap-4">
 
@@ -354,7 +354,7 @@ const BookingSummaryPage = () => {
             </section>
 
             {/* Selected Seats */}
-            <section className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+            <section className="rounded-3xl border border-slate-800 bg-[#111111] p-6 shadow-xl shadow-black/20">
 
               <div className="flex items-center justify-between mb-6">
 
@@ -408,7 +408,7 @@ const BookingSummaryPage = () => {
           {/* RIGHT - PRICE */}
           <aside>
 
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 lg:sticky lg:top-6">
+            <div className="rounded-3xl border border-brand-500/20 bg-[#111111] p-6 shadow-2xl shadow-black/30 lg:sticky lg:top-6">
 
               <h2 className="text-lg font-semibold mb-6">
                 Price Details
@@ -457,7 +457,7 @@ const BookingSummaryPage = () => {
               <button
                 onClick={handleProceedToPayment}
                 disabled={loading}
-                className="w-full mt-6 py-3.5 rounded-xl bg-red-600 hover:bg-red-700 disabled:bg-red-900 disabled:text-red-300 font-semibold transition flex items-center justify-center gap-2"
+                className="w-full mt-6 py-3.5 rounded-xl bg-[#ff243d] hover:bg-[#df1c32] disabled:bg-[#78101a] disabled:text-red-200 font-semibold text-white transition flex items-center justify-center gap-2"
               >
                 {loading ? (
                   <>

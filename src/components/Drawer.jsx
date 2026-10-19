@@ -8,11 +8,11 @@ export function Drawer({ open, onClose, title, placement = 'right', children, cl
   return (
     <div className={`fixed inset-0 z-40 ${open ? 'pointer-events-auto' : 'pointer-events-none'}`}>
       <div
-        className={`absolute inset-0 bg-slate-950/70 transition-opacity ${open ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute inset-0 bg-black/75 transition-opacity ${open ? 'opacity-100' : 'opacity-0'}`}
         onClick={onClose}
       />
       <div
-        className={`absolute ${placementStyles[placement] ?? placementStyles.right} flex flex-col overflow-hidden rounded-t-[2rem] border border-slate-800 bg-slate-950/95 shadow-2xl shadow-slate-950/40 transition-transform duration-300 ${
+        className={`absolute ${placementStyles[placement] ?? placementStyles.right} flex flex-col overflow-hidden rounded-t-[2rem] border border-[#333333] bg-[#111111] shadow-2xl shadow-black/60 transition-transform duration-300 ${
           open ? 'translate-x-0 translate-y-0' : placement === 'bottom' ? 'translate-y-full' : placement === 'left' ? '-translate-x-full' : 'translate-x-full'
         } ${className}`}
         {...props}
@@ -22,7 +22,7 @@ export function Drawer({ open, onClose, title, placement = 'right', children, cl
           <button
             type="button"
             onClick={onClose}
-            className="rounded-full p-2 text-slate-400 transition hover:bg-slate-900 hover:text-white"
+            className="rounded-full p-2 text-slate-400 transition hover:bg-brand-500/10 hover:text-brand-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-400"
             aria-label="Close drawer"
           >
             ✕

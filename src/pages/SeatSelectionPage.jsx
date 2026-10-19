@@ -104,7 +104,7 @@ const SeatSelectionPage = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-slate-950 text-white flex items-center justify-center">
+            <div className="cinehub-page min-h-screen bg-slate-950 text-white flex items-center justify-center">
                 <div className="text-center">
                     <div className="w-10 h-10 border-4 border-slate-600 border-t-red-500 rounded-full animate-spin mx-auto mb-4" />
                     <p className="text-slate-400">Loading seats...</p>
@@ -115,7 +115,7 @@ const SeatSelectionPage = () => {
 
     if (error) {
         return (
-            <div className="min-h-screen bg-slate-950 text-white flex items-center justify-center px-6">
+            <div className="cinehub-page min-h-screen bg-slate-950 text-white flex items-center justify-center px-6">
                 <div className="text-center">
                     <p className="text-red-400 mb-5">{error}</p>
 
@@ -131,10 +131,10 @@ const SeatSelectionPage = () => {
     }
 
     return (
-        <div className="min-h-screen bg-slate-950 text-white">
+        <div className="cinehub-page min-h-screen bg-slate-950 text-white">
 
             {/* Header */}
-            <header className="border-b border-slate-800 bg-slate-950/95">
+            <header className="border-b border-slate-800 bg-[#090909]/95 shadow-lg shadow-black/20">
                 <div className="max-w-7xl mx-auto px-5 py-4">
 
                     <button
@@ -183,7 +183,7 @@ const SeatSelectionPage = () => {
                                 Selected
                             </p>
 
-                            <p className="text-xl font-semibold">
+                            <p className="text-xl font-semibold text-brand-200">
                                 {selectedSeats.length}{" "}
                                 {selectedSeats.length === 1 ? "Seat" : "Seats"}
                             </p>
@@ -201,7 +201,7 @@ const SeatSelectionPage = () => {
                 <div className="max-w-2xl mx-auto mb-12">
 
                     <div className="relative">
-                        <div className="h-1 bg-slate-300 rounded-full" />
+                        <div className="h-1 rounded-full bg-gradient-to-r from-transparent via-brand-500/80 to-transparent shadow-md shadow-brand-500/20" />
 
                         <div className="absolute left-1/2 -translate-x-1/2 -top-5">
                             <span className="text-xs text-slate-500 tracking-[0.3em]">
@@ -229,7 +229,7 @@ const SeatSelectionPage = () => {
                                 >
 
                                     {/* Row name */}
-                                    <div className="w-6 text-center text-sm font-semibold text-slate-500">
+                                    <div className="w-6 text-center text-sm font-semibold text-brand-300">
                                         {rowName}
                                     </div>
 
@@ -285,7 +285,7 @@ const SeatSelectionPage = () => {
                                                                     ? "bg-yellow-900/40 text-yellow-600 cursor-not-allowed"
                                                                     : isSelected
                                                                         ? "bg-red-600 text-white scale-105 shadow-lg shadow-red-900/40"
-                                                                        : "bg-slate-800 text-slate-300 hover:bg-slate-700 hover:scale-105"
+                                                                        : "border border-slate-700 bg-[#171717] text-slate-300 hover:border-brand-500/50 hover:bg-slate-800 hover:scale-105"
                                                             }
                             `}
                                                     >
@@ -340,7 +340,7 @@ const SeatSelectionPage = () => {
             </main>
 
             {/* Bottom Booking Bar */}
-            <div className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur border-t border-slate-800">
+            <div className="fixed bottom-0 left-0 right-0 border-t border-slate-800 bg-[#111111]/95 shadow-[0_-12px_36px_rgba(0,0,0,0.35)] backdrop-blur">
 
                 <div className="max-w-7xl mx-auto px-5 py-4">
 

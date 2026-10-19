@@ -39,9 +39,10 @@ function VerifyOtpPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="cinehub-page space-y-6">
       <div>
-        <h1 className="text-3xl font-semibold text-white">Verify OTP</h1>
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-300">Account security</p>
+        <h1 className="text-3xl font-semibold tracking-tight text-white">Verify OTP</h1>
         <p className="mt-2 text-slate-400">Enter the code sent to {email || 'your email'}.</p>
       </div>
       <form onSubmit={handleVerify} className="space-y-4">
@@ -52,7 +53,7 @@ function VerifyOtpPage() {
             value={otpCode}
             onChange={(e) => setOtpCode(e.target.value)}
             type="text"
-            className="mt-2 w-full rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3 text-white outline-none focus:border-brand-400"
+            className="mt-2 w-full rounded-xl border border-slate-800 bg-[#111111] px-4 py-3 text-white outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
           />
         </label>
         <div className="flex items-center gap-2">

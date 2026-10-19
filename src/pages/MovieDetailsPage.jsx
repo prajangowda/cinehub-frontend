@@ -178,7 +178,7 @@ function MovieDetailsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-white">
+      <div className="cinehub-page min-h-screen bg-slate-950 flex items-center justify-center text-white">
 
         <div className="text-center">
 
@@ -197,12 +197,12 @@ function MovieDetailsPage() {
 
   return (
 
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="cinehub-page min-h-screen bg-slate-950 text-white">
 
 
       {/* ================= HERO SECTION ================= */}
 
-      <section className="relative min-h-[600px] overflow-hidden">
+      <section className="relative min-h-[600px] overflow-hidden border-b border-white/5">
 
 
         {/* Background Image */}
@@ -456,7 +456,7 @@ function MovieDetailsPage() {
 
       <section
         id="shows-section"
-        className="relative border-t border-white/10 bg-slate-900"
+        className="relative border-t border-white/10 bg-[#101010]"
       >
 
 
@@ -836,4 +836,3 @@ function MovieDetailsPage() {
 
 
 export default MovieDetailsPage;
-

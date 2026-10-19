@@ -1,6 +1,6 @@
 export function SearchInput({ placeholder = 'Search', className = '', ...props }) {
   return (
-    <div className={`w-full max-w-xl rounded-3xl border border-slate-800 bg-slate-950/90 px-4 py-3 ${className}`}>
+    <div className={`w-full max-w-xl rounded-2xl border border-slate-800 bg-[#111111] px-4 py-3 shadow-inner shadow-black/30 focus-within:border-brand-500 focus-within:ring-2 focus-within:ring-brand-500/15 ${className}`}>
       <input
         type="search"
         placeholder={placeholder}

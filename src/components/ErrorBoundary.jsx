@@ -20,7 +20,7 @@ class ErrorBoundary extends React.Component {
     const { error, info } = this.state;
     if (error) {
       return (
-        <div className="p-6">
+        <div className="cinehub-page min-h-[60vh] rounded-3xl border border-slate-800 bg-[#111111] p-6 shadow-2xl shadow-black/30">
           <h2 className="text-2xl font-semibold text-red-400">An error occurred</h2>
           <pre className="mt-4 max-h-[60vh] overflow-auto whitespace-pre-wrap rounded bg-slate-900 p-4 text-sm text-red-200">
             {String(error && (error.stack || error.message || error))}

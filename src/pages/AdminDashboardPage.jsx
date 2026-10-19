@@ -223,13 +223,13 @@ function AdminDashboardPage() {
   }, []);
 
   return (
-    <div className="flex gap-6">
+    <div className="cinehub-page flex flex-col gap-6 lg:flex-row">
 
       {/* ========================= */}
       {/* SIDEBAR */}
       {/* ========================= */}
 
-      <aside className="w-60 rounded-2xl border border-slate-800 bg-slate-900/80 p-4">
+      <aside className="w-full shrink-0 rounded-2xl border border-slate-800 bg-[#111111] p-4 shadow-xl shadow-black/20 lg:w-60">
 
         <div className="mb-4">
           <h2 className="text-lg font-semibold text-white">
@@ -250,8 +250,8 @@ function AdminDashboardPage() {
             onClick={() => setActiveTab("movie")}
             className={`rounded-xl px-3 py-2 text-left text-sm font-medium transition ${
               activeTab === "movie"
-                ? "bg-slate-800 text-white"
-                : "text-slate-300 hover:bg-slate-950/60"
+                ? "bg-brand-500/10 text-brand-200 ring-1 ring-inset ring-brand-500/20"
+                  : "text-slate-300 hover:bg-slate-950/60 hover:text-white"
             }`}
           >
             Create Movie
@@ -267,8 +267,8 @@ function AdminDashboardPage() {
             }}
             className={`rounded-xl px-3 py-2 text-left text-sm font-medium transition ${
               activeTab === "movies"
-                ? "bg-slate-800 text-white"
-                : "text-slate-300 hover:bg-slate-950/60"
+                ? "bg-brand-500/10 text-brand-200 ring-1 ring-inset ring-brand-500/20"
+                  : "text-slate-300 hover:bg-slate-950/60 hover:text-white"
             }`}
           >
             Manage Movies
@@ -281,8 +281,8 @@ function AdminDashboardPage() {
             onClick={() => setActiveTab("requests")}
             className={`rounded-xl px-3 py-2 text-left text-sm font-medium transition ${
               activeTab === "requests"
-                ? "bg-slate-800 text-white"
-                : "text-slate-300 hover:bg-slate-950/60"
+                ? "bg-brand-500/10 text-brand-200 ring-1 ring-inset ring-brand-500/20"
+                  : "text-slate-300 hover:bg-slate-950/60 hover:text-white"
             }`}
           >
             Owner Requests
@@ -296,9 +296,10 @@ function AdminDashboardPage() {
       {/* MAIN CONTENT */}
       {/* ========================= */}
 
-      <div className="flex-1 space-y-6 rounded-3xl border border-slate-800 bg-slate-900/80 p-8 shadow-xl shadow-slate-950/20">
+      <div className="min-w-0 flex-1 space-y-6 rounded-3xl border border-slate-800 bg-[#111111] p-5 shadow-2xl shadow-black/30 sm:p-8">
 
         <div>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-300">Control panel</p>
           <h1 className="text-3xl font-semibold text-white">
             Admin Dashboard
           </h1>
@@ -330,7 +331,7 @@ function AdminDashboardPage() {
                 value={form.title}
                 onChange={handleChange}
                 required
-                className="mt-2 w-full rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3 text-white"
+                className="mt-2 w-full rounded-xl border border-slate-800 bg-[#0b0b0b] px-4 py-3 text-white outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
               />
             </label>
 
@@ -844,4 +845,3 @@ function AdminDashboardPage() {
 }
 
 export default AdminDashboardPage;
-

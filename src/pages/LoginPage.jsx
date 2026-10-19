@@ -23,9 +23,10 @@ function LoginPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="cinehub-page space-y-6">
       <div>
-        <h1 className="text-3xl font-semibold text-white">Sign in</h1>
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-300">Welcome back</p>
+        <h1 className="text-3xl font-semibold tracking-tight text-white">Sign in</h1>
         <p className="mt-2 text-slate-400">Access your CineHub account.</p>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -36,7 +37,7 @@ function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             type="email"
-            className="mt-2 w-full rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3 text-white outline-none focus:border-brand-400"
+            className="mt-2 w-full rounded-xl border border-slate-800 bg-[#111111] px-4 py-3 text-white outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
           />
         </label>
         <label className="block text-sm text-slate-300">
@@ -45,12 +46,12 @@ function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
-            className="mt-2 w-full rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3 text-white outline-none focus:border-brand-400"
+            className="mt-2 w-full rounded-xl border border-slate-800 bg-[#111111] px-4 py-3 text-white outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20"
           />
         </label>
         <button
           type="submit"
-          className="w-full rounded-2xl bg-brand-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-brand-400"
+          className="w-full rounded-xl bg-brand-500 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-900/30 transition hover:bg-brand-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-300"
         >
           Continue
         </button>

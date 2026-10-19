@@ -161,20 +161,21 @@ function MoviesPage() {
 
 
   return (
-    <div className="space-y-10">
+    <div className="cinehub-page space-y-10">
 
       <SectionHeading
         label="Movies"
         title="Browse the CineHub movie lineup"
         description="Search and explore featured titles with instant page-based navigation and loading states."
+        labelClassName="!text-white"
       />
 
 
       {/* SEARCH + FILTERS */}
 
-      <div className="grid gap-4 lg:grid-cols-[1.5fr_1fr] xl:grid-cols-[1.7fr_1fr]">
+      <div className="rounded-3xl border border-slate-800 bg-[#101010] p-5 shadow-xl shadow-black/20 lg:grid lg:grid-cols-[1.5fr_1fr] lg:gap-5 xl:grid-cols-[1.7fr_1fr]">
 
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+        <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-center lg:mb-0">
 
           <SearchInput
             placeholder="Search by title, genre, or tag"
@@ -291,7 +292,7 @@ function MoviesPage() {
 
       {/* MOVIES */}
 
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid grid-cols-2 justify-items-center gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 lg:gap-x-8">
 
         {loading ? (
 
@@ -299,14 +300,14 @@ function MoviesPage() {
 
             <div
               key={index}
-              className="space-y-4"
+              className="w-full max-w-[250px] space-y-3"
             >
 
-              <Skeleton className="h-72 rounded-[2rem]" />
+              <Skeleton className="aspect-[3/5] rounded-2xl" />
 
-              <Skeleton className="h-6 w-3/4 rounded-full" />
+              <Skeleton className="h-6 w-3/4 rounded-md" />
 
-              <Skeleton className="h-5 w-1/2 rounded-full" />
+              <Skeleton className="h-5 w-1/2 rounded-md" />
 
               <Skeleton className="h-12 rounded-2xl" />
 
@@ -316,7 +317,7 @@ function MoviesPage() {
 
         ) : error ? (
 
-          <div className="col-span-full rounded-3xl border border-slate-800 bg-slate-900/80 p-10 text-center text-slate-300">
+          <div className="w-full rounded-3xl border border-slate-800 bg-[#111111] p-10 text-center text-slate-300">
 
             {error}
 
@@ -325,11 +326,9 @@ function MoviesPage() {
         ) : sortedMovies.length > 0 ? (
 
           sortedMovies.map((movie) => (
-
             <MovieCard
               key={movie.id}
               {...movie}
-
               onAction={() => {
                 console.log(
                   'Clicked movie:',
@@ -341,12 +340,11 @@ function MoviesPage() {
                 );
               }}
             />
-
           ))
 
         ) : (
 
-          <div className="col-span-full rounded-3xl border border-slate-800 bg-slate-900/80 p-10 text-center text-slate-300">
+          <div className="w-full rounded-3xl border border-slate-800 bg-[#111111] p-10 text-center text-slate-300">
 
             <p className="text-lg font-semibold text-white">
               No movies found

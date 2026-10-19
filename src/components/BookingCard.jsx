@@ -9,10 +9,10 @@ const statusStyles = {
 
 export function BookingCard({ movie, theatre, time, date, seats, total, status = 'confirmed', className = '' }) {
   return (
-    <Card className={`space-y-4 p-6 ${className}`}>
+    <Card className={`space-y-4 border-[#303030] bg-[#111111] p-6 transition hover:border-brand-500/30 ${className}`}>
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-sm uppercase tracking-[0.3em] text-brand-200">{theatre}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-300">{theatre}</p>
           <h3 className="mt-2 text-xl font-semibold text-white">{movie}</h3>
           <p className="mt-1 text-sm text-slate-400">{date} · {time}</p>
         </div>

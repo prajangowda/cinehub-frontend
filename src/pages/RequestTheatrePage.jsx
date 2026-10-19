@@ -38,9 +38,11 @@ function RequestTheatrePage() {
   };
 
   return (
-    <div className="rounded-3xl border border-slate-800 bg-slate-900/80 p-8 shadow-xl shadow-slate-950/20">
+    <div className="cinehub-page relative overflow-hidden rounded-3xl border border-[#303030] bg-[#111111] p-6 shadow-2xl shadow-black/40 sm:p-8">
+      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-700 via-brand-500 to-transparent" />
       <div className="mb-8">
-        <h1 className="text-3xl font-semibold text-white">Register Theatre</h1>
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-300">Partner with CineHub</p>
+        <h1 className="text-3xl font-semibold tracking-tight text-white">Register Theatre</h1>
         <p className="mt-2 text-slate-400">Request theatre owner access so an admin can approve your role.</p>
       </div>
 

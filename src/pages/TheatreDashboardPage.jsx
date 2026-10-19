@@ -471,8 +471,8 @@ function TheatreDashboardPage() {
   };
 
   return (
-    <div className="flex gap-6">
-      <aside className="w-60 rounded-2xl border border-slate-800 bg-slate-900/80 p-4">
+    <div className="cinehub-page flex flex-col gap-6 lg:flex-row">
+      <aside className="w-full shrink-0 rounded-2xl border border-slate-800 bg-[#111111] p-4 shadow-xl shadow-black/20 lg:w-60">
         <div className="mb-4">
           <h2 className="text-lg font-semibold text-white">Owner</h2>
           <p className="text-xs text-slate-400">Choose an action</p>
@@ -482,7 +482,7 @@ function TheatreDashboardPage() {
             type="button"
             onClick={() => setActiveTab('details')}
             className={`text-left rounded-xl px-3 py-2 text-sm font-medium transition ${
-              activeTab === 'details' ? 'bg-slate-800 text-white' : 'text-slate-300 hover:bg-slate-950/60'
+              activeTab === 'details' ? 'bg-brand-500/10 text-brand-200 ring-1 ring-inset ring-brand-500/20' : 'text-slate-300 hover:bg-slate-950/60 hover:text-white'
             }`}
           >
             Theatre Details
@@ -491,7 +491,7 @@ function TheatreDashboardPage() {
             type="button"
             onClick={() => setActiveTab('screens')}
             className={`text-left rounded-xl px-3 py-2 text-sm font-medium transition ${
-              activeTab === 'screens' ? 'bg-slate-800 text-white' : 'text-slate-300 hover:bg-slate-950/60'
+              activeTab === 'screens' ? 'bg-brand-500/10 text-brand-200 ring-1 ring-inset ring-brand-500/20' : 'text-slate-300 hover:bg-slate-950/60 hover:text-white'
             }`}
           >
             Screen Management
@@ -500,7 +500,7 @@ function TheatreDashboardPage() {
             type="button"
             onClick={() => setActiveTab('shows')}
             className={`text-left rounded-xl px-3 py-2 text-sm font-medium transition ${
-              activeTab === 'shows' ? 'bg-slate-800 text-white' : 'text-slate-300 hover:bg-slate-950/60'
+              activeTab === 'shows' ? 'bg-brand-500/10 text-brand-200 ring-1 ring-inset ring-brand-500/20' : 'text-slate-300 hover:bg-slate-950/60 hover:text-white'
             }`}
           >
             Show Management
@@ -531,9 +531,10 @@ function TheatreDashboardPage() {
         )}
       </aside>
 
-      <div className="flex-1 space-y-6 rounded-3xl border border-slate-800 bg-slate-900/80 p-8 shadow-xl shadow-slate-950/20">
+      <div className="min-w-0 flex-1 space-y-6 rounded-3xl border border-slate-800 bg-[#111111] p-5 shadow-2xl shadow-black/30 sm:p-8">
         <div>
-          <h1 className="text-3xl font-semibold text-white">Theatre Dashboard</h1>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-300">Venue management</p>
+          <h1 className="text-3xl font-semibold tracking-tight text-white">Theatre Dashboard</h1>
           <p className="mt-3 text-slate-400">Manage theatre details and update screens for your cinema.</p>
         </div>
 

@@ -7,6 +7,7 @@ import {
   getAllMovies,
   deleteMovie,
 } from "../api/adminApi.js";
+import { Pagination } from "../components/Pagination.jsx";
 
 const initialMovieForm = {
   title: "KGF Chapter 3",
@@ -59,6 +60,8 @@ function AdminDashboardPage() {
   const [movies, setMovies] = useState([]);
   const [loadingMovies, setLoadingMovies] = useState(false);
   const [deletingMovieId, setDeletingMovieId] = useState(null);
+  const [moviePage, setMoviePage] = useState(0);
+  const [totalMoviePages, setTotalMoviePages] = useState(0);
 
   const [activeTab, setActiveTab] = useState("movie");
 
@@ -131,13 +134,23 @@ function AdminDashboardPage() {
   // GET ALL MOVIES
   // =========================
 
-  const loadMovies = async () => {
+  const loadMovies = async (page = moviePage) => {
     setLoadingMovies(true);
 
     try {
-      const data = await getAllMovies();
+      const data = await getAllMovies({ page, size: 9 });
+      const movieList = Array.isArray(data) ? data : data?.content;
 
-      setMovies(Array.isArray(data) ? data : []);
+      if (!Array.isArray(movieList)) {
+        throw new Error("Unexpected movies response format.");
+      }
+
+      const pageCount = Array.isArray(data) ? 1 : Number(data.totalPages ?? 1);
+      setMovies(movieList);
+      setTotalMoviePages(
+        Number.isFinite(pageCount) && pageCount > 0 ? pageCount : 0
+      );
+      setMoviePage(page);
     } catch (error) {
       console.error("Failed to load movies", error);
 
@@ -656,6 +669,15 @@ function AdminDashboardPage() {
 
               </div>
 
+            )}
+
+            {!loadingMovies && totalMoviePages > 1 && (
+              <Pagination
+                currentPage={moviePage + 1}
+                totalPages={totalMoviePages}
+                onChange={(page) => loadMovies(page - 1)}
+                className="mt-8"
+              />
             )}
 
           </div>

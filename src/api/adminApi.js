@@ -20,8 +20,8 @@ export async function rejectOwnerRequest(id) {
   return response.data;
 }
 
-export const getAllMovies = async () => {
-  const response = await apiClient.get("/public/movies");
+export const getAllMovies = async (params = {}) => {
+  const response = await apiClient.get("/public/movies", { params });
   return response.data;
 };
 
